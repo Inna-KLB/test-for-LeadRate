@@ -1,31 +1,22 @@
 <script setup>
 import PlusIcon from './icons/PlusIcon';
-import { ref } from 'vue';
+import { useStore } from 'vuex';
+import { ref, onMounted, computed } from 'vue';
+import AppTodoForm from './AppTodoForm.vue';
+import AppTodoList from './AppTodoList.vue';
 
-const todos = [
-  {
-    id: 1,
-    title: 'repellendus sunt dolores architecto voluptatum',
-    completed: false
-  },
-  {
-    id: 4,
-    title: 'repellendus sunt dolores architecto voluptatum',
-    completed: true
-  },
-  {
-    id: 2,
-    title: 'repellendus sunt dolores architecto voluptatum',
-    completed: false
-  },
-  {
-    id: 3,
-    title: 'repellendus sunt dolores architecto voluptatum',
-    completed: true
-  }
-];
+const store = useStore();
+
+onMounted(async () => {
+  await store.dispatch('getTodoList');
+});
+
+const todos = computed(() => {
+  return store.getters.todoList;
+});
 
 const isClosed = ref(false);
+
 </script>
 
 <template>
@@ -45,36 +36,10 @@ const isClosed = ref(false);
     </div>
     <!-- /.todo__head -->
 
-    <form
-      v-show="false"
-      class="todo__form"
-    >
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Текст задания..."
-      >
-    </form>
+    <AppTodoForm
+      :is-closed="isClosed" />
 
-    <div class="todo__list">
-      <div
-        v-for="todo in todos"
-        :key="todo.id"
-        class="todo__list-item"
-        :class="{'todo__list-item_completed': todo.completed}"
-      >
-        <div class="todo__list-item-info">
-          <h4 class="todo__list-item-info-title">
-            {{ todo.title }}
-          </h4>
-          <h6 class="todo__list-item-info-description">
-            {{ todo.title }}
-          </h6>
-        </div>
-        <!-- /.todo__list-item-info -->
-      </div>
-      <!-- /.todo__list-item -->
-    </div>
-    <!-- /.todo__list -->
+    <AppTodoList
+      :todos="todos"  />
   </div>
 </template>

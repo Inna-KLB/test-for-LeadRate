@@ -167,6 +167,19 @@
   }
 }
 
+.slide-fade {
+  &-enter-active {
+    transition: all 0.3s ease-out;
+  }
+  &-leave-active {
+    transition: all 0.3s ease-in-out;
+  }
+  &-enter-from,
+  &-leave-to {
+    transform: translateY(-15px);
+    opacity: 0;
+  }
+}
 
 @media (max-width: 576px) {
   .todo {
