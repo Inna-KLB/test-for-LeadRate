@@ -17,20 +17,13 @@ let todos = computed(() => {
 
 let isClosed = ref(false);
 
-const deleteCompletedTasks = () => {
-  store.commit('deleteCompletedTasks');
-};
-
 const toggleForm = () => {
   isClosed.value = !isClosed.value;
 };
 </script>
 
 <template>
-  <div
-    class="todo"
-    @keyup.delete="deleteCompletedTasks"
-  >
+  <div class="todo">
     <AppTodoHead
       :is-closed="isClosed"
       @click="toggleForm"
