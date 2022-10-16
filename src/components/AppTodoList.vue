@@ -8,7 +8,8 @@
       @click="toggleTask(todo.id)"
     >
       <AppTodoListItem
-        :todo="todo" />
+        :todo="todo"
+      />
     </div>
   </div>
 </template>

@@ -27,16 +27,21 @@ const toggleForm = () => {
 </script>
 
 <template>
-  <div class="todo" @keyup.delete="deleteCompletedTasks" >
-
+  <div
+    class="todo"
+    @keyup.delete="deleteCompletedTasks"
+  >
     <AppTodoHead
       :is-closed="isClosed"
-      @click="toggleForm" />
+      @click="toggleForm"
+    />
 
     <AppTodoForm
-      :is-closed="isClosed" />
+      :is-closed="isClosed"
+    />
 
     <AppTodoList
-      :todos="todos" />
+      :todos="todos"
+    />
   </div>
 </template>
