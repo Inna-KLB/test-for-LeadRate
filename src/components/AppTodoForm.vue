@@ -1,7 +1,7 @@
 <template>
   <transition name="slide-fade">
     <form
-      v-show="!isClosed"
+      v-show="isClosed"
       class="todo__form"
       @submit.prevent="addTaskTodo"
     >

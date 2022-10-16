@@ -1,9 +1,9 @@
 <script setup>
-import PlusIcon from './icons/PlusIcon';
 import { useStore } from 'vuex';
 import { ref, onMounted, computed } from 'vue';
 import AppTodoList from './AppTodoList.vue';
 import AppTodoForm from './AppTodoForm.vue';
+import AppTodoHead from './AppTodoHead.vue';
 
 const store = useStore();
 
@@ -15,26 +15,23 @@ let todos = computed(() => {
   return store.getters.todoList;
 });
 
-const isClosed = ref(true);
+let isClosed = ref(false);
 
+const deleteCompletedTasks = () => {
+  store.commit('deleteCompletedTasks');
+};
+
+const toggleForm = () => {
+  isClosed.value = !isClosed.value;
+};
 </script>
 
 <template>
-  <div class="todo">
-    <div class="todo__head">
-      <h2 class="todo__head-title">
-        Мой день
-      </h2>
+  <div class="todo" @keyup.delete="deleteCompletedTasks" >
 
-      <button
-        class="btn"
-        :class="{'btn--closed': isClosed}"
-        @click="isClosed = !isClosed"
-      >
-        <PlusIcon />
-      </button>
-    </div>
-    <!-- /.todo__head -->
+    <AppTodoHead
+      :is-closed="isClosed"
+      @click="toggleForm" />
 
     <AppTodoForm
       :is-closed="isClosed" />

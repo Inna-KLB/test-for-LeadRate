@@ -22,5 +22,8 @@ export default {
       title: payload.title,
       completed: false
     });
+  },
+  deleteCompletedTasks(state) {
+    state.todoList = state.todoList.filter(todo => todo.completed === false);
   }
 };
